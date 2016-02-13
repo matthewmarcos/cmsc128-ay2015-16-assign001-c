@@ -6,6 +6,7 @@
 #include<string.h>
 
 void numToWords (int x) {
+    int i, j, numHolderLevels, length, thunder = 0, remainingLength;
     char str[225];
     char number[] = "";
     char *ones[] = {
@@ -29,15 +30,16 @@ void numToWords (int x) {
         "sixty", "seventy",
         "eighty", "ninety"
     };
-    char *thunders[] = {"hundred", "thousand", "million"};
-
+    char *thunders[] = {"", "thousand", "million"};
     sprintf(str, "%d", x); //Convert integer to characters
+    length = (int)strlen(str);
+    printf("Excess: %d\n", length%3);
+    printf("Thunder: %s\n", thunders[(length-1)/3]);
 
-    // printf("%s\n", str);
-    int length = ;
-    int i, j;
-    for(i = strlen(str) ; i >=0 ; i--) {
-        printf("%c\n", str[i]);
+    i = 0;
+    while(str[i] != 0) {
+
+
+        i++;
     }
-
 }
