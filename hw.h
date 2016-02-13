@@ -5,6 +5,19 @@
 #include<stdlib.h>
 #include<string.h>
 
+void wordsToNum(char input[]) {
+    // Accepts a number in
+    // word form (from zero to 1
+    // million) and returns it in
+    // numerical form
+    // Input must be in
+    // lowercase
+
+    char characterArray[225][225];
+    char tempHolder[];
+    int number;
+
+}
 
 void numbersDelimited(int num, char delimiter, int interval) {
     // Accepts three arguments:
