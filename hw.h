@@ -6,6 +6,10 @@
 #include<string.h>
 
 void numToWords (int x) {
+    if(x == 0) {
+        printf("zero\n");
+        return;
+    }
     int i, j, y, numHolderLevels, length, thunder = 0, remainingLength, excess;
     char str[225], tempString[225];
     char number[225];
@@ -16,7 +20,7 @@ void numToWords (int x) {
         "six ", "seven ",
         "eight ", "nine "
     };
-    char *teens[] = { "",
+    char *teens[] = {
         "ten ", "eleven ",
         "twelve ", "thirteen ",
         "fourteen ", "fifteen ",
@@ -30,10 +34,12 @@ void numToWords (int x) {
         "sixty ", "seventy ",
         "eighty ", "ninety "
     };
-    char *thunders[] = {"", "thousand", "million"};
+    char *thunders[] = {"", "thousand ", "million "};
+    char hundred[9];
+    strcpy(hundred, "hundred ");
     strcpy(number, "");
     sprintf(str, "%d", x); //Convert integer to characters
-
+    printf("str: %s\n", str);
     length = (int)strlen(str);
     excess = length%3;
     thunder = (length-1)/3;
@@ -54,14 +60,17 @@ void numToWords (int x) {
 
             //Analyze tempString
 
-            if(tempString[0] != '0') { //hundreds
+            if(tempString[0] > '0') { //hundreds
                 strcat(number, ones[tempString[0]-'0']);
-                strcat(number, "hundred ");
+                strcat(number, hundred);
             }
             if(tempString[1] > '1') {
                 strcat(number, tens[tempString[1]-'0']);
             }
-            if(tempString[2]> '0') {
+            if(tempString[1] == '1') {
+                strcat(number, teens[tempString[2]-'0']);
+            }
+            else if(tempString[2] > '0') {
                 strcat(number, ones[tempString[2]-'0']);
             }
 
@@ -75,9 +84,24 @@ void numToWords (int x) {
                 tempString[y] = currentLetter[y];
             }
             printf("TempString2: %s\n", tempString);
+
+            if(tempString[0] > '0') { //hundreds
+                strcat(number, ones[tempString[0]-'0']);
+                strcat(number, hundred);
+            }
+            if(tempString[1] > '1') {
+                strcat(number, tens[tempString[1]-'0']);
+            }
+            if(tempString[1] == '1') {
+                strcat(number, teens[tempString[2]-'0']);
+            }
+            else if(tempString[2] > '0') {
+                strcat(number, ones[tempString[2]-'0']);
+            }
+
+            strcat(number, thunders[thunder]);
+            thunder--;
         }
-        strcat(number, thunders[i]);
-        thunder--;
     }
 
 

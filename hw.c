@@ -1,6 +1,6 @@
 #include"hw.h"
 
 int main (void) {
-    numToWords(32345678);
+    numToWords(0);
     return 0;
 }
