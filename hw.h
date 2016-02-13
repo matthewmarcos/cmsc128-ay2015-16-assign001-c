@@ -6,7 +6,7 @@
 #include<string.h>
 
 
-void numbersDelimited(int num, char[] delimiter, int interval) {
+void numbersDelimited(int num, char delimiter, int interval) {
     // Accepts three arguments:
     // the first is the number from
     // zero to 1 miliion, the
@@ -18,6 +18,49 @@ void numbersDelimited(int num, char[] delimiter, int interval) {
     // (from right most going to
     // left most digit)
     char number[225];
+    char str[225];
+    int excess = 0, i = 0 , j = 0 , intervalCount = 1;
+    // Initialize the variables
+    sprintf(str, "%d", num);
+    int length = (int)strlen(str); //length
+    // for(i = 0;i < 255; i++) number[i] = '\0';
+    excess = length%interval;
+
+    // printf("Number to print: %s\n", str);
+    // printf("delimiter to print: %c\n", delimiter);
+    // printf("Interval to print: %d\n", interval);
+    // printf("excess to print: %d\n", excess);
+    // printf("length of str: %d\n", length);
+    printf("Output: %s\n", number);
+
+    i = 0; j = 0;
+    if(excess > 0) {
+        for(j = 0 ; j < excess ; j++, i++) {
+            // number[i] = str[j];
+            putchar(str[j]);
+        }
+        // number[i] = delimiter;
+        putchar(delimiter);
+        i++;
+    }
+
+    for(; j < length ; j++, i++) {
+        // number[i] = str[j];
+        putchar(str[j]);
+        if(intervalCount == interval && (int)strlen(str + j) > 1) {
+            // number[i] = delimiter;
+            // printf("Length remaining: %d\n", (int)strlen(str + j));
+            putchar(delimiter);
+            i++;
+            intervalCount = 1;
+            continue;
+        }
+        intervalCount++;
+    }
+
+    putchar('\n');
+
+    return;
 
 }
 
