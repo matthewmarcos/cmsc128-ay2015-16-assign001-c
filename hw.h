@@ -39,13 +39,9 @@ void numToWords (int x) {
     strcpy(hundred, "hundred ");
     strcpy(number, "");
     sprintf(str, "%d", x); //Convert integer to characters
-    printf("str: %s\n", str);
     length = (int)strlen(str);
     excess = length%3;
     thunder = (length-1)/3;
-    printf("Excess: %d\n", excess);
-    printf("Thunder: %d\n", thunder);
-    // printf("Thunder: %s\n", thunders[thunder]);
     int gotExcess = 0; //Did not get the excess
     i = 0;
     while(thunder >= 0) {
@@ -83,7 +79,6 @@ void numToWords (int x) {
             for(int y = 0 ; y < 3 ; y++, i++) {
                 tempString[y] = currentLetter[y];
             }
-            printf("TempString2: %s\n", tempString);
 
             if(tempString[0] > '0') { //hundreds
                 strcat(number, ones[tempString[0]-'0']);
