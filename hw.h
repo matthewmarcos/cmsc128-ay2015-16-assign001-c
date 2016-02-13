@@ -9,5 +9,5 @@ void numToWords (int x) {
     char str[225];
     sprintf(str, "%d", x);
 
-    printf("%s", str);
+    printf("%s\n", str);
 }
