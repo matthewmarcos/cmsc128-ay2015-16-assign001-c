@@ -5,20 +5,36 @@
 #include<stdlib.h>
 #include<string.h>
 
-void wordsToNum(char input[]) {
+void wordsToNum(char str[]) {
     // Accepts a number in
     // word form (from zero to 1
     // million) and returns it in
     // numerical form
     // Input must be in
     // lowercase
+    int i = 0 , j = 0 , f = 0 , wordCount = 0 , answer = 0;
+    const char s[2] = " ";
+    char *token;
+    char numbersDelimited[225][225];
+    // http://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
+    // get the first token
+    token = strtok(str, s);
+    //  walk through other tokens
+    i = 0;
+    while( token != NULL ) {
+        // printf("%s\n", token);
+        strcpy(numbersDelimited[i], token);
+        i++;
+        token = strtok(NULL, s);
+    }
+    wordCount = i;
 
-    char characterArray[225][225];
-    char tempHolder[];
-    int number;
+    for(i = 0 ; i < wordCount ; i++) {
+        printf("Word %d: %s\n", i, numbersDelimited[i]);
+    }
 
+    return;
 }
-
 void numbersDelimited(int num, char delimiter, int interval) {
     // Accepts three arguments:
     // the first is the number from
