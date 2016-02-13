@@ -31,6 +31,10 @@ void numbersDelimited(int num, char delimiter, int interval) {
     // printf("Interval to print: %d\n", interval);
     // printf("excess to print: %d\n", excess);
     // printf("length of str: %d\n", length);
+    if(length <= interval) {
+        printf("Output: %s\n", str);
+        return;
+    }
     printf("Output: %s\n", number);
 
     i = 0; j = 0;

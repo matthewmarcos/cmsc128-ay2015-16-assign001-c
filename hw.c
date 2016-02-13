@@ -2,7 +2,7 @@
 
 int main (void) {
     // numToWords(995123);
-    numbersDelimited(54323215, '!', 5);
+    numbersDelimited(5, '!', 3);
     return 0;
 
 }
