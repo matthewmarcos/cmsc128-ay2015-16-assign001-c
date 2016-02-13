@@ -18,7 +18,7 @@ void wordsToNum(char str[]) {
     // numerical form
     // Input must be in
     // lowercase
-    int i = 0 , j = 0 , f = 0 , wordCount = 0 , answer = 0;
+    int i = 0 , j = 0 , f = 0 , wordCount = 0 , answer = 0, index = 0;
     const char s[2] = " ";
     char *token;
     char numbersDelimited[225][225];
@@ -38,8 +38,17 @@ void wordsToNum(char str[]) {
     for(i = 0 ; i < wordCount ; i++) {
         printf("Word %d: %s\n", i, numbersDelimited[i]);
     }
-    int index = findIndex(numbersDelimited, wordCount, "ninety");
-    printf("%d\n", index);
+    index = findIndex(numbersDelimited, wordCount, "million");
+    if(index != -1) {
+        // Evaluate
+        answer = 1000000;
+    }
+    index = findIndex(numbersDelimited, wordCount, "thousand");
+    if(index != -1) {
+        // Evaluate
+        answer += 1000;
+    }
+    printf("%d\n", answer);
 
     return;
 }
@@ -51,6 +60,8 @@ int findIndex(char mainArray[225][225], int limit, char searchFor[]) {
             return i;
         }
     }
+
+    return -1;
 }
 
 void numbersDelimited(int num, char delimiter, int interval) {
