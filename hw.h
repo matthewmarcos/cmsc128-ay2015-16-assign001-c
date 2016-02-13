@@ -4,6 +4,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+void numbersDelimited(int num, char delimiter, int interval);
+void wordsToNum(char str[]);
+int findIndex(char mainArray[225][225], int limit, char searchFor[]);
+void numToWords (int x);
+
+
 
 void wordsToNum(char str[]) {
     // Accepts a number in
@@ -32,9 +38,21 @@ void wordsToNum(char str[]) {
     for(i = 0 ; i < wordCount ; i++) {
         printf("Word %d: %s\n", i, numbersDelimited[i]);
     }
+    int index = findIndex(numbersDelimited, wordCount, "ninety");
+    printf("%d\n", index);
 
     return;
 }
+
+int findIndex(char mainArray[225][225], int limit, char searchFor[]) {
+    int i, j;
+    for(i = 0 ; i < limit ; i++) {
+        if(!strcmp(mainArray[i], searchFor)) {
+            return i;
+        }
+    }
+}
+
 void numbersDelimited(int num, char delimiter, int interval) {
     // Accepts three arguments:
     // the first is the number from
