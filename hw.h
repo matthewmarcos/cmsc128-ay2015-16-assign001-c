@@ -6,41 +6,81 @@
 #include<string.h>
 
 void numToWords (int x) {
-    int i, j, numHolderLevels, length, thunder = 0, remainingLength;
-    char str[225];
-    char number[] = "";
+    int i, j, y, numHolderLevels, length, thunder = 0, remainingLength, excess;
+    char str[225], tempString[225];
+    char number[225];
     char *ones[] = {
-        "zero", "one",
-        "two", "three",
-        "four", "five",
-        "six", "seven",
-        "eight", "nine"
+        "", "one ",
+        "two ", "three ",
+        "four ", "five ",
+        "six ", "seven ",
+        "eight ", "nine "
     };
     char *teens[] = { "",
-        "ten", "eleven",
-        "twelve", "thirteen",
-        "fourteen", "fifteen",
-        "sixteen", "seventeen",
-        "eighteen", "nineteen",
+        "ten ", "eleven ",
+        "twelve ", "thirteen ",
+        "fourteen ", "fifteen ",
+        "sixteen ", "seventeen ",
+        "eighteen ", "nineteen ",
     };
     char *tens[] = {
         "", "",
-        "twenty", "thirty",
-        "forty", "fifty",
-        "sixty", "seventy",
-        "eighty", "ninety"
+        "twenty ", "thirty ",
+        "forty ", "fifty ",
+        "sixty ", "seventy ",
+        "eighty ", "ninety "
     };
     char *thunders[] = {"", "thousand", "million"};
+    strcpy(number, "");
     sprintf(str, "%d", x); //Convert integer to characters
+
     length = (int)strlen(str);
-    printf("Excess: %d\n", length%3);
+    excess = length%3;
     thunder = (length-1)/3;
-    printf("Thunder: %s\n", thunders[thunder]);
-    // i = 0;
-    // while(str[i] != 0) {
-    //     char *currentLetter = str + i;
-    //     int lengthRemaining = (int)strlen(currentLetter);
-    //     printf("%c Remaining: %d\n", currentLetter[0], lengthRemaining-1);
-    //     i++;
-    // }
+    printf("Excess: %d\n", excess);
+    printf("Thunder: %d\n", thunder);
+    // printf("Thunder: %s\n", thunders[thunder]);
+    int gotExcess = 0; //Did not get the excess
+    i = 0;
+    while(thunder >= 0) {
+        j = 0;
+        strcpy(tempString, "000");
+        char *currentLetter = str + i;
+        if(!gotExcess && excess != 0) { //Di pa nakuka ang kaltas
+            for(j = excess-1, y = 2 ; j >= 0; j--, i++, y--) {
+                tempString[y] = currentLetter[j];
+            }
+            printf("TempString: %s\n", tempString);
+
+            //Analyze tempString
+
+            if(tempString[0] != '0') { //hundreds
+                strcat(number, ones[tempString[0]-'0']);
+                strcat(number, "hundred ");
+            }
+            if(tempString[1] > '1') {
+                strcat(number, tens[tempString[1]-'0']);
+            }
+            if(tempString[2]> '0') {
+                strcat(number, ones[tempString[2]-'0']);
+            }
+
+            strcat(number, thunders[thunder]);
+            gotExcess = 1;
+            thunder--;
+            continue;
+        }
+        else {
+            for(int y = 0 ; y < 3 ; y++, i++) {
+                tempString[y] = currentLetter[y];
+            }
+            printf("TempString2: %s\n", tempString);
+        }
+        strcat(number, thunders[i]);
+        thunder--;
+    }
+
+
+    printf("Input: %d\n", x);
+    printf("Output: %s\n", number);
 }
