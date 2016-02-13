@@ -34,12 +34,13 @@ void numToWords (int x) {
     sprintf(str, "%d", x); //Convert integer to characters
     length = (int)strlen(str);
     printf("Excess: %d\n", length%3);
-    printf("Thunder: %s\n", thunders[(length-1)/3]);
-
-    i = 0;
-    while(str[i] != 0) {
-
-
-        i++;
-    }
+    thunder = (length-1)/3;
+    printf("Thunder: %s\n", thunders[thunder]);
+    // i = 0;
+    // while(str[i] != 0) {
+    //     char *currentLetter = str + i;
+    //     int lengthRemaining = (int)strlen(currentLetter);
+    //     printf("%c Remaining: %d\n", currentLetter[0], lengthRemaining-1);
+    //     i++;
+    // }
 }
