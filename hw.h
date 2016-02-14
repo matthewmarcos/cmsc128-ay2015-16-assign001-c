@@ -5,12 +5,18 @@
 #include<stdlib.h>
 #include<string.h>
 void numbersDelimited(int num, char delimiter, int interval);
-int wordsToNum(char str[]);
+void wordsToNum(char str[]);
 int findIndex(char mainArray[225][225], int limit, char searchFor[]);
 void numToWords (int x);
 int evaluateNumber(char mainArray[225][225], int size);
+int __wordsToNum(char str[]);
 
-int wordsToNum(char str[]) {
+void wordsToNum(char str[]) {
+    printf("%d\n", __wordsToNum(str));
+    return;
+}
+
+int __wordsToNum(char str[]) {
     // Accepts a number in
     // word form (from zero to 1
     // million) and returns it in
@@ -34,15 +40,10 @@ int wordsToNum(char str[]) {
         token = strtok(NULL, s);
     }
     wordCount = i;
-
-    for(i = 0 ; i < wordCount ; i++) {
-        printf("Word %d: %s\n", i, numbersDelimited[i]);
-    }
     tempIndex = 0;
     index = findIndex(numbersDelimited, wordCount, "million"); //Kung may million
     if(index != -1) {
         // Evaluate
-        printf("Millions flag\n");
         for(i = tempIndex ; i < index ; i++) {
             strcpy(tempArray[i], numbersDelimited[i]);
         }
@@ -51,34 +52,24 @@ int wordsToNum(char str[]) {
     }
     index = findIndex(numbersDelimited, wordCount, "thousand"); //kung may thousand
     if(index != -1) {
-        printf("thousands flag\n");
-        printf("tempIndexThousands %d\n", tempIndex);
         // Evaluate
         for(j = 0, i = tempIndex ; i < index ;j++, i++) {
             strcpy(tempArray[j], numbersDelimited[i]);
         }
         answer += evaluateNumber(tempArray, index-tempIndex) * 1000;
         tempIndex = i + 1;
-        printf("tempIndex: %d\n", tempIndex);
     }
     //
     for(j = 0, i = tempIndex ; i < wordCount ;j++, i++) {
         strcpy(tempArray[j], numbersDelimited[i]);
     }
     answer += evaluateNumber(tempArray, wordCount-tempIndex);
-
-    printf("%d\n", answer);
-
     return answer;
 }
 
 int evaluateNumber(char mainArray[225][225], int size) {
     int i, j, k;
     int numHolder = 0, temp = 0;
-    printf("Size: %d\n", size);
-    for(i = 0 ; i < size ; i++) {
-        printf("Word[subarry] %d: %s\n", i, mainArray[i]);
-    }
     for(i = 0 ; i < size ; i++) {
         if(!strcmp(mainArray[i], "hundred") && i >= 1) { //May hundred
             // Determine if one to nine
