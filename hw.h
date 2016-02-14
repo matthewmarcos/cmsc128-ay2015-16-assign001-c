@@ -8,8 +8,7 @@ void numbersDelimited(int num, char delimiter, int interval);
 void wordsToNum(char str[]);
 int findIndex(char mainArray[225][225], int limit, char searchFor[]);
 void numToWords (int x);
-
-
+int evaluateNumber(char mainArray[225][225], int size);
 
 void wordsToNum(char str[]) {
     // Accepts a number in
@@ -19,9 +18,10 @@ void wordsToNum(char str[]) {
     // Input must be in
     // lowercase
     int i = 0 , j = 0 , f = 0 , wordCount = 0 , answer = 0, index = 0;
+    int tempHundreds, tempTens, tempOnes, tempIndex;
     const char s[2] = " ";
     char *token;
-    char numbersDelimited[225][225];
+    char numbersDelimited[225][225], tempArray[225][225];
     // http://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
     // get the first token
     token = strtok(str, s);
@@ -38,19 +38,158 @@ void wordsToNum(char str[]) {
     for(i = 0 ; i < wordCount ; i++) {
         printf("Word %d: %s\n", i, numbersDelimited[i]);
     }
-    index = findIndex(numbersDelimited, wordCount, "million");
+    tempIndex = 0;
+    index = findIndex(numbersDelimited, wordCount, "million"); //Kung may million
     if(index != -1) {
         // Evaluate
-        answer = 1000000;
+        for(i = 0 ; i < index ; i++) {
+            strcpy(tempArray[i], numbersDelimited[i]);
+        }
+        tempIndex = i;
+        answer += evaluateNumber(tempArray, index) * 1000000;
     }
-    index = findIndex(numbersDelimited, wordCount, "thousand");
+    index = findIndex(numbersDelimited, wordCount, "thousand"); //kung may thousand
     if(index != -1) {
         // Evaluate
-        answer += 1000;
+        for(i = tempIndex+1 ; i < index ; i++) {
+            strcpy(tempArray[i], numbersDelimited[i]);
+        }
+        // answer += evaluateNumber(tempArray, index-tempIndex) * 1000;
     }
     printf("%d\n", answer);
 
     return;
+}
+
+int evaluateNumber(char mainArray[225][225], int size) {
+    int i, j, k;
+    int numHolder = 0, temp = 0;
+    for(i = 0 ; i < size ; i++) {
+        if(!strcmp(mainArray[i], "hundred") && i >= 1) { //May hundred
+            // Determine if one to nine
+            temp = 0;
+            if(!strcmp(mainArray[i-1], "one")) {
+                temp = 1;
+            }
+            else if(!strcmp(mainArray[i-1], "two")) {
+                temp = 2;
+            }
+            else if(!strcmp(mainArray[i-1], "three")) {
+                temp = 3;
+            }
+            else if(!strcmp(mainArray[i-1], "four")) {
+                temp = 4;
+            }
+            else if(!strcmp(mainArray[i-1], "five")) {
+                temp = 5;
+            }
+            else if(!strcmp(mainArray[i-1], "six")) {
+                temp = 6;
+            }
+            else if(!strcmp(mainArray[i-1], "seven")) {
+                temp = 7;
+            }
+            else if(!strcmp(mainArray[i-1], "eight")) {
+                temp = 8;
+            }
+            else if(!strcmp(mainArray[i-1], "nine")) {
+                temp = 9;
+            }
+            temp *= 100;
+            numHolder += temp;
+        }
+        if(!strcmp(mainArray[i], "nineteen")) { //teens
+            numHolder += 19;
+        }
+        else if(!strcmp(mainArray[i], "nineteen")) { //teens
+            numHolder += 19;
+        }
+        else if(!strcmp(mainArray[i], "eighteen")) { //teens
+            numHolder += 18;
+        }
+        else if(!strcmp(mainArray[i], "seventeen")) { //teens
+            numHolder += 17;
+        }
+        else if(!strcmp(mainArray[i], "sixteen")) { //teens
+            numHolder += 16;
+        }
+        else if(!strcmp(mainArray[i], "fifteen")) { //teens
+            numHolder += 15;
+        }
+        else if(!strcmp(mainArray[i], "fourteen")) { //teens
+            numHolder += 14;
+        }
+        else if(!strcmp(mainArray[i], "thirteen")) { //teens
+            numHolder += 13;
+        }
+        else if(!strcmp(mainArray[i], "twelve")) { //teens
+            numHolder += 12;
+        }
+        else if(!strcmp(mainArray[i], "eleven")) { //teens
+            numHolder += 11;
+        }
+        else if(!strcmp(mainArray[i], "ten")) { //teens
+            numHolder += 10;
+        }
+        else if(!strcmp(mainArray[i], "ninety")) { //tens... then ones in this else if
+            numHolder += 90;
+        }
+        else if(!strcmp(mainArray[i], "eighty")) { //tens... then ones in this else if
+            numHolder += 80;
+        }
+        else if(!strcmp(mainArray[i], "seventy")) { //tens... then ones in this else if
+            numHolder += 70;
+        }
+        else if(!strcmp(mainArray[i], "sixty")) { //tens... then ones in this else if
+            numHolder += 60;
+        }
+        else if(!strcmp(mainArray[i], "fifty")) { //tens... then ones in this else if
+            numHolder += 50;
+        }
+        else if(!strcmp(mainArray[i], "forty")) { //tens... then ones in this else if
+            numHolder += 40;
+        }
+        else if(!strcmp(mainArray[i], "thirty")) { //tens... then ones in this else if
+            numHolder += 30;
+        }
+        else if(!strcmp(mainArray[i], "twenty")) { //tens... then ones in this else if
+            numHolder += 20;
+        }
+        else if(i == size-1){
+            temp = 0;
+            if(!strcmp(mainArray[i], "one")) {
+                temp = 1;
+            }
+            else if(!strcmp(mainArray[i], "two")) {
+                temp = 2;
+            }
+            else if(!strcmp(mainArray[i], "three")) {
+                temp = 3;
+            }
+            else if(!strcmp(mainArray[i], "four")) {
+                temp = 4;
+            }
+            else if(!strcmp(mainArray[i], "five")) {
+                temp = 5;
+            }
+            else if(!strcmp(mainArray[i], "six")) {
+                temp = 6;
+            }
+            else if(!strcmp(mainArray[i], "seven")) {
+                temp = 7;
+            }
+            else if(!strcmp(mainArray[i], "eight")) {
+                temp = 8;
+            }
+            else if(!strcmp(mainArray[i], "nine")) {
+                temp = 9;
+            }
+            numHolder += temp;
+        }
+    }
+    // printf("numholder: %d\n", numHolder);
+
+    return numHolder;
 }
 
 int findIndex(char mainArray[225][225], int limit, char searchFor[]) {
