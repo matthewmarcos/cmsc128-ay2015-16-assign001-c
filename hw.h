@@ -235,10 +235,10 @@ void numbersDelimited(int num, char delimiter, int interval) {
     excess = length%interval;
 
     if(length <= interval) {
-        printf("Output: %s\n", str);
+        printf("%s\n", str);
         return;
     }
-    printf("Output: %s\n", number);
+    printf("%s\n", number);
 
     i = 0; j = 0;
     if(excess > 0) { //print the ones excess if you group numbers by interval
@@ -367,7 +367,5 @@ void numToWords (int x) {
         }
     }
 
-
-    printf("Input: %d\n", x);
-    printf("Output: %s\n", number);
+    printf("%s\n", number);
 }
