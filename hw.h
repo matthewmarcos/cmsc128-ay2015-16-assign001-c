@@ -10,6 +10,12 @@ int findIndex(char mainArray[225][225], int limit, char searchFor[]);
 void numToWords (int x);
 int evaluateNumber(char mainArray[225][225], int size);
 int __wordsToNum(char str[]);
+void wordsToCurrency(char str[], char str2[]);
+
+void wordsToCurrency(char str[], char str2[]) {
+    printf("%d %s\n", __wordsToNum(str), str2);
+    return;
+}
 
 void wordsToNum(char str[]) {
     printf("%d\n", __wordsToNum(str));

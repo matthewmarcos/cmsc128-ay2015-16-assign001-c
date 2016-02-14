@@ -4,7 +4,8 @@ int main (void) {
     // numToWords(995123);
     // numbersDelimited(5, '!', 3);
     char input[225] = "five hundred sixty five million nine hundred twenty two thousand";
-    wordsToNum(input);
+    // wordsToNum(input);
+    wordsToCurrency(input, "USD");
     return 0;
 
 }
