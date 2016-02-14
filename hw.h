@@ -49,7 +49,7 @@ int __wordsToNum(char str[]) {
     tempIndex = 0;
     index = findIndex(numbersDelimited, wordCount, "million"); //Kung may million
     if(index != -1) {
-        // Evaluate
+        // Copy to subarray
         for(i = tempIndex ; i < index ; i++) {
             strcpy(tempArray[i], numbersDelimited[i]);
         }
@@ -59,13 +59,14 @@ int __wordsToNum(char str[]) {
     index = findIndex(numbersDelimited, wordCount, "thousand"); //kung may thousand
     if(index != -1) {
         // Evaluate
+        // Copy to subarray first
         for(j = 0, i = tempIndex ; i < index ;j++, i++) {
             strcpy(tempArray[j], numbersDelimited[i]);
         }
         answer += evaluateNumber(tempArray, index-tempIndex) * 1000;
         tempIndex = i + 1;
     }
-    //
+    // Copy to subarray
     for(j = 0, i = tempIndex ; i < wordCount ;j++, i++) {
         strcpy(tempArray[j], numbersDelimited[i]);
     }
@@ -74,6 +75,7 @@ int __wordsToNum(char str[]) {
 }
 
 int evaluateNumber(char mainArray[225][225], int size) {
+    // Returns number less than 1000 (it repeats every time between the thousands)
     int i, j, k;
     int numHolder = 0, temp = 0;
     for(i = 0 ; i < size ; i++) {
